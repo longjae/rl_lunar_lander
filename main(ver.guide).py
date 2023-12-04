@@ -165,4 +165,4 @@ def main(train_flag:bool=True):
     env.close()  # 환경 종료
 
 if __name__ == "__main__":
-    main(train_flag=True)  # 학습 플래그가 True일 경우 학습 진행
+    main(train_flag=True)  # 학습 플래그가 True일 경우 학습 진행 
