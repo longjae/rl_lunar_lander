@@ -78,25 +78,27 @@ def train(q, q_target, memory, optimizer):
         loss.backward()
         optimizer.step()
 
-def main(train:bool=True):
+def main(train_flag:bool=True):
     q = Qnet()
     q_target = Qnet()
     q_target.load_state_dict(q.state_dict())
-    if train:
+    if train_flag:
         print("train model")
         env = gym.make("LunarLander-v2")
-    if not train:
+        episode = 100
+    if not train_flag:
         print("load model")
         saved_weights_path = "./dqn_model.pth"
         q.load_state_dict(torch.load(saved_weights_path))
         env = gym.make("LunarLander-v2", render_mode="human")
+        episode = 10
     memory = ReplayBuffer()
     
     print_interval = 20
     score = 0.0
     optimizer = optim.Adam(q.parameters(), lr=lr)
     
-    for n_epi in range(20):
+    for n_epi in range(episode):
         epsilon = max(0.01, 0.08-0.01*(n_epi/200))
         s, _ = env.reset()
         done = False
@@ -128,10 +130,10 @@ def main(train:bool=True):
             print("n_episode :{}, score : {:.1f}, n_buffer : {}, eps : {:.1f}%".format(
                                                             n_epi, score/print_interval, memory.size(), epsilon*100))
             score = 0.0
-    if train:
+    if train_flag:
         torch.save(q.state_dict(), "./dqn_model.pth")
         print("DQN model has saved.")
     env.close()
 
 if __name__ == "__main__":
-    main(True)
+    main(train_flag=True)
