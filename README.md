@@ -1,5 +1,3 @@
-물론입니다. 아래는 OpenAI Gym의 LunarLander 환경에 대한 README.md에 작성할 수 있는 예시 목차와 내용입니다. 아래의 예시를 참고하여 작성하시면 됩니다. 목차 및 내용은 개선하거나 수정할 수 있습니다.
-
 ---
 
 # LunarLander Environment
@@ -51,12 +49,7 @@ env.close()
 ```
 
 ## 환경 버전 정보
-- OpenAI Gym: v0.20.0
+- OpenAI Gym: v0.29.1
 - LunarLander: v2
 
-## 저작권
-이 환경은 OpenAI Gym의 일부로 제공되며, 해당 저작권에 따릅니다.
-
 ---
-
-이 예시 README.md는 LunarLander 환경에 대한 간략한 소개와 사용법을 담고 있습니다. 문서화에 따라 추가적인 정보를 포함하여 환경에 대한 이해도를 높일 수 있습니다.
