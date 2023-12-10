@@ -6,6 +6,10 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
+import argparse
+import warnings
+
+warnings.filterwarnings('ignore')
 
 # 하이퍼파라미터 설정
 lr = 0.0005  # 학습률
@@ -126,7 +130,7 @@ def main(train_flag:bool=True):
     if train_flag:
         print("train model")
         env = gym.make("LunarLander-v2")  # LunarLander-v2 환경 로드
-        episode = 5000  # 학습 에피소드 수
+        episode = 10000  # 학습 에피소드 수
     if not train_flag:
         print("load model")
         saved_weights_path = "./dqn_model.pth"  # 저장된 모델 경로
@@ -178,7 +182,26 @@ def main(train_flag:bool=True):
         plt.xlabel("Episode")
         plt.ylabel("Score")
         plt.savefig("dqn_score.png")
+    else:
+        print("Finished to load model.")
     env.close()  # 환경 종료
+    
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 if __name__ == "__main__":
-    main(train_flag=True)  # 학습 플래그가 True일 경우 학습 진행 
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--train", type=str2bool, nargs='?', const=True, default=False,)
+    args = parser.parse_args()
+    
+    if args.train:
+        main(train_flag=True)  # 학습 플래그가 True일 경우 학습 진행 
+    else:
+        main(train_flag=False)
