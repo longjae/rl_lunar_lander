@@ -72,7 +72,7 @@ python ./dqn.py -t False
 ```
 
 ## 환경 버전 정보
-- OpenAI Gym: v0.29.1
+- OpenAI Gymnasium: v0.29.1
 - LunarLander: v2
 
 ---
